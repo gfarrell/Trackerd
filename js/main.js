@@ -11,8 +11,8 @@
 require.config({
     baseUrl: 'js',
     paths: {
-        jQuery: 'libs/jquery-1.7.2.min',
-        Underscore: 'libs/underscore-min',
+        jQuery: 'libs/jquery-1.7.2.min', jquery: 'libs/jquery-1.7.2.min',       // unfortunately some libs have lower case stuff deeply buried so this keeps everything compat.
+        Underscore: 'libs/underscore-min', underscore: 'libs/underscore-min',   // likewise above
         Backbone: 'libs/backbone-min',
         Mootools: 'libs/mootools/core',
         Bootstrap: 'libs/bootstrap/bootstrap.min',
