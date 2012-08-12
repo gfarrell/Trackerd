@@ -82,6 +82,17 @@ define(['Backbone', 'Core/Location', 'Underscore', 'Mootools', 'Core/Sync'], fun
             tags = this.get('tags');
             return tags.contains(tag);
         },
+
+        setLocation: function(lat, lon) {
+            var location = this.get('location');
+            if(instanceOf(location, Location)) {
+                location.latitude = lat;
+                location.longitude = lon;
+            } else {
+                location = new Location(lat, lon);
+            }
+            
+            this.set('location', location);
         }
     });
 });
