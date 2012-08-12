@@ -101,5 +101,22 @@ define(['Mootools', 'Core/Number.extend'], function() {
         }
     });
 
+    /**
+     * Gets current location as a Location object
+     * @return {Location} Current Location
+     */
+    Location.currentLocation = function() {
+        if(navigator.geolocation) {
+            var location = new Location(0,0);
+            var current = navigator.getCurrentPosition(function(coords) {
+                location.latitude = coords.latitude;
+                location.longitude = coords.longitude;
+                location.accuracy = coords.accuracy;
+            });
+        } else {
+            throw new Error('Geolocation is not available in this browser.');
+        }
+    };
+
     return Location;
 });
