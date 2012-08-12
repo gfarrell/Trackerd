@@ -9,8 +9,12 @@
     @author     Gideon Farrell <me@gideonfarrell.co.uk>
  */
 
-var Places = (function() {
+define(['Backbone', 'Models/Place'], function(Backbone, Place) {
     return Backbone.Collection.extend({
-        model: Place
+        model: Place,
+
+        sync: function() {
+            
+        }
     });
-}());
+});

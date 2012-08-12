@@ -9,7 +9,7 @@
     @author     Gideon Farrell <me@gideonfarrell.co.uk>
  */
 
-var Place = (function() {
+define(['Backbone', 'Underscore', 'Mootools'], function(Backbone, _) {
     return Backbone.Model.extend({
         defaults: {
             tags: [],       // An array of tags for this Place
@@ -79,4 +79,4 @@ var Place = (function() {
             }
         }
     });
-}());
+});
