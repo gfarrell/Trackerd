@@ -19,10 +19,6 @@ require.config({
         Collections: 'Models/Collections'
     },
     shim: {
-        'Backbone': {
-            deps: ['Underscore', 'jQuery'],
-            exports: 'Backbone'
-        },
         'Bootstrap': ['jQuery']
     }
 });
