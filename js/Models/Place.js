@@ -9,7 +9,7 @@
     @author     Gideon Farrell <me@gideonfarrell.co.uk>
  */
 
-define(['Backbone', 'Underscore', 'Mootools'], function(Backbone, _) {
+define(['Backbone', 'Core/Location', 'Underscore', 'Mootools'], function(Backbone, Location) {
     return Backbone.Model.extend({
         defaults: {
             tags: [],       // An array of tags for this Place
@@ -23,10 +23,10 @@ define(['Backbone', 'Underscore', 'Mootools'], function(Backbone, _) {
 
             // Instantiate a location object to cope with location features
             if(location_obj === null) {
-                location_obj = new Location([0,0]);
+                location_obj = new Location(0,0);
             } else {
                 if(!instanceOf(location_obj, Location)) {
-                    location_obj = new Location(location_obj);
+                    location_obj = Location.newLocationFromArray(location_obj);
                 }
             }
 
