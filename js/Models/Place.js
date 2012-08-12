@@ -77,6 +77,11 @@ define(['Backbone', 'Core/Location', 'Underscore', 'Mootools', 'Core/Sync'], fun
             if(tags.contains(tag)) {
                 tags.erase(tag);
             }
+        },
+        hasTag: function(tag) {
+            tags = this.get('tags');
+            return tags.contains(tag);
+        },
         }
     });
 });
