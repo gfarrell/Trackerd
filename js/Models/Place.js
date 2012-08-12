@@ -9,7 +9,7 @@
     @author     Gideon Farrell <me@gideonfarrell.co.uk>
  */
 
-define(['Backbone', 'Core/Location', 'Underscore', 'Mootools'], function(Backbone, Location) {
+define(['Backbone', 'Core/Location', 'Underscore', 'Mootools', 'Core/Sync'], function(Backbone, Location) {
     return Backbone.Model.extend({
         defaults: {
             tags: [],       // An array of tags for this Place
