@@ -42,7 +42,7 @@ define(['Backbone', 'Core/Location', 'Underscore', 'Mootools'], function(Backbon
 
         validate: function(attributes) {
             // Validate the location
-            if(!instanceOf(attributes.location, Location) || !Location.validate()) {
+            if(!instanceOf(attributes.location, Location)) {
                 return 'Invalid location object, please try and set the location again.';
             }
 
