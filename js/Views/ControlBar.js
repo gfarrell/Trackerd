@@ -20,7 +20,7 @@ define(['Backbone', 'jQuery'], function(Backbone) {
         render: function() {
             var inner   = $(this.make('div', {'class':'navbar-inner'})),
                 cont    = $(this.make('div', {'class':'container'})),
-                brand   = $(this.make('a', {'class':'brand', 'href':'#'}, 'Trkrd')),
+                brand   = $(this.make('a', {'class':'brand', 'href':'#'}, 'Trckd')),
                 nav     = $(this.make('ul', {'class':'nav pull-right'})),
                 menu    = [
                     {'action':'places/add', 'icon':'map-marker', 'text':'Add a place'},
