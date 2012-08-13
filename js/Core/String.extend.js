@@ -33,6 +33,19 @@ define(['Mootools'], function() {
             }
             
             return Boolean(""+this);
+        },
+
+        /**
+         * Simple string formating (numerical replacement)
+         *
+         * @param  {String} [replacement_1, replacement_2, ...]  A list of replacements
+         * @return {String} formatted string
+         */
+        format: function() {
+            var args = arguments;
+            return this.replace(/\{(\d+)\}/g, function(match, number) {
+                return typeof args[number] != 'undefined' ? args[number] : match;
+            });
         }
     });
 });
