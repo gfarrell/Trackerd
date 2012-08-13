@@ -31,6 +31,7 @@ define(['Mootools', 'Core/Number.extend'], function() {
                         throw new Error('Latitude must be a number between 90 and -90.');
                     }
                     position[0] = lat;
+                    this.fireEvent('update');
                 }
             });
             Object.defineProperty(this, 'longitude', {
@@ -42,6 +43,7 @@ define(['Mootools', 'Core/Number.extend'], function() {
                         throw new Error('Longitude must be a number between 180 and -180.');
                     }
                     position[1] = long;
+                    this.fireEvent('update');
                 }
             });
 
