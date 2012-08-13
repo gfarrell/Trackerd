@@ -51,10 +51,13 @@
     @elementHeight: 20px;
     padding: ((@navbarHeight - @elementHeight) / 2 - 2) 20px ((@navbarHeight - @elementHeight) / 2 + 2);
     margin-left: -20px; // negative indent to left-align the text down the page
-    font-size: 20px;
-    font-weight: 200;
     line-height: 1;
     color: @navbarBrandColor;
+
+    font-size: 2em;
+    font-family: @headingsFontFamily;
+    font-weight: bold;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, .1), 0 0 30px rgba(255, 255, 255, .125);
   }
   // Plain text in topbar
   .navbar-text {
