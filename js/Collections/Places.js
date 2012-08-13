@@ -5,7 +5,7 @@
     @provides   Places
     @requires   libs/Backbone, Models/Place, Core/Store, Core/Sync
     @file       Places.js
-    @package    Trackerd/Models/Collections
+    @package    Trackerd/Collections
     @author     Gideon Farrell <me@gideonfarrell.co.uk>
  */
 
