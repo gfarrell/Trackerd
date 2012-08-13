@@ -38,17 +38,40 @@ define(['Mootools', 'Core/Number.extend'], function() {
                 get: function() {
                     return position[1];
                 },
-                set: function(long) {
-                    if(typeOf(long) != 'number' || Math.abs(long) > 180) {
+                set: function(lon) {
+                    if(typeOf(lon) != 'number' || Math.abs(lon) > 180) {
                         throw new Error('Longitude must be a number between 180 and -180.');
                     }
-                    position[1] = long;
+                    position[1] = lon;
+                    this.fireEvent('update');
+                }
+            });
+            Object.defineProperty(this, 'position', {
+                get: function() {
+                    return position;
+                },
+                set: function(arr) {
+                    if(typeOf(arr) != 'array' || arr.length != 2) {
+                        throw new Error('Position must be an array of latitude,longitude.');
+                    }
+                    var lat = arr[0],
+                        lon = arr[1];
+
+                    if(typeOf(lat) != 'number' || Math.abs(lat) > 90) {
+                        throw new Error('Latitude must be a number between 90 and -90.');
+                    }
+                    if(typeOf(lon) != 'number' || Math.abs(lon) > 180) {
+                        throw new Error('Longitude must be a number between 180 and -180.');
+                    }
+
+                    position[0] = lat;
+                    position[1] = lon;
+
                     this.fireEvent('update');
                 }
             });
 
-            this.latitude = latitude;
-            this.longitude = longitude;
+            this.position = [latitude, longitude];
         }
     });
 
