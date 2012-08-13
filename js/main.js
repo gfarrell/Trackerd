@@ -25,16 +25,20 @@ require.config({
 
 require(
     [
-        'app',
-
         // Non AMD modules that need specific order
         'jQuery',
         'Underscore',
         'Backbone',
         'Mootools',
-        'Bootstrap'
+        'Bootstrap',
+
+        'Routers/PlacesRouter'
     ],
-    function(Trackerd) {
-        Trackerd.init();
+    function(Backbone, PlacesRouter) {
+        var Router = new PlacesRouter();
+
+        Backbone.history.start({
+            root: (window.location.host.indexOf('localhost') != -1 || window.location.host.indexOf('gidbook') != -1) ? '/trackerd/' : '/'
+        });
     }
 );
