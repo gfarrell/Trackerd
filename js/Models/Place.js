@@ -30,6 +30,9 @@ define(['Backbone', 'Core/Location', 'Underscore', 'Mootools', 'Core/Sync'], fun
                 }
             }
 
+            // Add an event to the location to save on update
+            location_obj.addEvent('update', this.save.bind(this));
+
             // Make sure the tag list is unique
             tags_list = _.uniq(tags_list);
 
@@ -91,7 +94,7 @@ define(['Backbone', 'Core/Location', 'Underscore', 'Mootools', 'Core/Sync'], fun
             } else {
                 location = new Location(lat, lon);
             }
-            
+
             this.set('location', location);
         }
     });
