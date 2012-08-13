@@ -16,6 +16,12 @@
 	<link rel="stylesheet" language="text/css" href="less/style.css">
 
 	<script src="js/libs/modernizr-2.5.3-respond-1.1.0.min.js"></script>
+  <!-- Livereload -->
+  <script>
+    if(location.host.indexOf('localhost') >= 0 || location.host.indexOf('gidbook') >= 0) {
+      document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>');
+    }
+  </script>
 </head>
 <body>
 <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
