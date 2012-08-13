@@ -11,6 +11,8 @@
 
 define(['Mootools', 'Core/Number.extend'], function() {
     var Location = new Class({
+        Implements: [Events],
+
         /**
          * Constructor
          * @param  {Number} latitude  Latitude of location (+ve => North, -ve => South)
@@ -108,11 +110,26 @@ define(['Mootools', 'Core/Number.extend'], function() {
     Location.currentLocation = function() {
         if(navigator.geolocation) {
             var location = new Location(0,0);
-            var current = navigator.getCurrentPosition(function(coords) {
-                location.latitude = coords.latitude;
-                location.longitude = coords.longitude;
-                location.accuracy = coords.accuracy;
-            });
+            var current = navigator.getCurrentPosition(
+                function(coords) { // Success function
+                    location.latitude = coords.latitude;
+                    location.longitude = coords.longitude;
+                    location.accuracy = coords.accuracy;
+                    location.fireEvent('update');
+                },
+                function(error) { // Error function
+                    var errors = { 
+                        1: 'Permission denied',
+                        2: 'Position unavailable',
+                        3: 'Request timeout'
+                    };
+
+                    throw new Error('Unable to get geolocation data: '+error[error.code]);
+                },
+                { // Options
+                    enableHighAccuracy: true, timeout: 1000*60*2, maximumAge: 0
+                }
+            );
         } else {
             throw new Error('Geolocation is not available in this browser.');
         }
