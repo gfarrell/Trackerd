@@ -31,7 +31,8 @@ require(
         'jQuery',
         'Underscore',
         'Backbone',
-        'Mootools'
+        'Mootools',
+        'Bootstrap'
     ],
     function(Trackerd) {
         Trackerd.init();
