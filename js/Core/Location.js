@@ -117,6 +117,14 @@ define(['Mootools', 'Core/Number.extend'], function() {
         }
     };
 
+    Location.GEO_TIMEOUT = 1000*60*2;
+    Location.GEO_THRESHOLD = 100;
+    Location.GEO_ERRORS = {
+        1: 'Permission denied',
+        2: 'Position unavailable',
+        3: 'Request timeout'
+    };
+
     Location.implement({
         /**
          * Gives the distance to another Location object
