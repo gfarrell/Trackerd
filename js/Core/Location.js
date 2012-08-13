@@ -111,13 +111,20 @@ define(['Mootools', 'Core/Number.extend'], function() {
      */
     Location.currentLocation = function() {
         if(navigator.geolocation) {
-            var location = new Location(0,0);
-            var current = navigator.getCurrentPosition(
-                function(coords) { // Success function
-                    location.latitude = coords.latitude;
-                    location.longitude = coords.longitude;
-                    location.accuracy = coords.accuracy;
-                    location.fireEvent('update');
+            var location    = new Location(0,0),
+                watchid     = null,
+                timeout     = 1000*60*2,
+                threshold   = 100;
+
+            watchid = navigator.geolocation.watchPosition(
+                function(position) { // Success function
+                    if(position.coords.accuracy < threshold) {
+                        location.latitude = position.coords.latitude;
+                        location.longitude = position.coords.longitude;
+                        location.accuracy = position.coords.accuracy;
+                        location.fireEvent('update');
+                        navigator.geolocation.clearWatch(watchid);
+                    }
                 },
                 function(error) { // Error function
                     var errors = { 
@@ -129,9 +136,11 @@ define(['Mootools', 'Core/Number.extend'], function() {
                     throw new Error('Unable to get geolocation data: '+error[error.code]);
                 },
                 { // Options
-                    enableHighAccuracy: true, timeout: 1000*60*2, maximumAge: 0
+                    'enableHighAccuracy': true, 'timeout': timeout, 'maximumAge': 0
                 }
             );
+
+            return location;
         } else {
             throw new Error('Geolocation is not available in this browser.');
         }
