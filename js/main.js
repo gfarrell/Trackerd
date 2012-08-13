@@ -15,8 +15,7 @@ require.config({
         Underscore: 'libs/underscore-min', underscore: 'libs/underscore-min',   // likewise above
         Backbone: 'libs/backbone-min',
         Mootools: 'libs/mootools/core',
-        Bootstrap: 'libs/bootstrap/bootstrap.min',
-        Collections: 'Models/Collections'
+        Bootstrap: 'libs/bootstrap/bootstrap.min'
     },
     shim: {
         'Bootstrap': ['jQuery']
@@ -32,13 +31,18 @@ require(
         'Mootools',
         'Bootstrap',
 
-        'Routers/PlacesRouter'
+        'Routers/PlacesRouter',
+        'Views/App'
     ],
-    function(Backbone, PlacesRouter) {
+    function(_jQ, _U, Backbone, _M, _B, PlacesRouter, AppView) {
         var Router = new PlacesRouter();
 
         Backbone.history.start({
             root: (window.location.host.indexOf('localhost') != -1 || window.location.host.indexOf('gidbook') != -1) ? '/trackerd/' : '/'
         });
+
+        // Initialise the AppView
+        $(".no-js").remove();
+        var view = new AppView({el: $('div[data-view=AppView]')});
     }
 );
