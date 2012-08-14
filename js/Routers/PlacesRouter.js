@@ -9,8 +9,8 @@
  */
 
 define(
-    ['Backbone', 'Views/App', 'Views/PlacesList'],
-    function(Backbone, AppView, PlacesListView) {
+    ['Backbone', 'Collections/Places', 'Views/App', 'Views/PlacesList', 'Views/EditPlace'],
+    function(Backbone, Places, AppView, PlacesListView, EditPlaceView) {
         return Backbone.Router.extend({
             routes: {
                 'places/index':       'index',
@@ -39,7 +39,20 @@ define(
             },
 
             edit: function(id) {
-                console.log('Editing '+id);
+                if(this.Views.EditPlace === undefined) {
+                    this.Views.EditPlace = new EditPlaceView();
+                }
+
+                if(id !== undefined) {
+                    var pl = Places.getByCid(id);
+                    if(pl !== undefined && pl !== null) {
+                        this.Views.EditPlace.primeForEdit(pl);
+                    }
+                } else {
+                    this.Views.EditPlace.primeForNew();
+                }
+                this.AppView.loadView(this.Views.EditPlace);
+                this.AppView.render();
             },
             view: function(id) {
                 console.log('Viewing '+id);
