@@ -31,10 +31,15 @@ require(
         'Mootools',
         'Bootstrap',
 
+        // Nice Classes
         'Routers/PlacesRouter',
-        'Views/App'
+        'Views/App',
+        'Core/Location'
     ],
-    function(_jQ, _U, Backbone, _M, _B, PlacesRouter, AppView) {
+    function(_jQ, _U, Backbone, _M, _B, PlacesRouter, AppView, Location) {
+        window.LocationTracker = new Location(0,0);
+        window.LocationTracker.setToCurrent();
+
         var Router = new PlacesRouter();
 
         Backbone.history.start({
