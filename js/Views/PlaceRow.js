@@ -15,9 +15,10 @@ define(
             tagName: 'li',
             className: 'PlaceRow',
 
-            initialize: function(model) {
-                this.model = model.model;
-                this.model.on('change', this.render.bind(this));
+            initialize: function() {
+                this.model.on('change', this.render, this);
+                this.model.on('destroy', this.remove, this);
+
 
                 this.$note = $('<span class="place-note"></span>');
                 this.$tags = $('<span class="place-tags"></span>');
