@@ -9,8 +9,8 @@
  */
 
 define(
-    ['Backbone', 'Models/Place', 'Collections/Places', 'Views/PlacesList'],
-    function(Backbone, Place, Places, PlacesListView) {
+    ['Backbone', 'Views/App', 'Views/PlacesList'],
+    function(Backbone, AppView, PlacesListView) {
         return Backbone.Router.extend({
             routes: {
                 'places/index':       'index',
@@ -21,14 +21,17 @@ define(
                 'places/edit/:id':    'edit'
             },
 
+            initialize: function() {
+                this.Views = {};
+                this.AppView = new AppView({el: $('div[data-view=AppView]')});
+            },
+
             index: function() {
-                Places.fetch();
-
-                // Instantiate the list view
-                var view = new PlacesListView({
-                    collection: Places
-                });
-
+                if(this.Views.PlacesList === undefined) {
+                    this.Views.PlacesList = new PlacesListView();
+                }
+                this.AppView.loadView(this.Views.PlacesList);
+                this.AppView.render();
             },
 
             nearMe: function() {
@@ -36,7 +39,7 @@ define(
             },
 
             edit: function(id) {
-                var current = new Place();
+                console.log('Editing '+id);
             },
             view: function(id) {
                 console.log('Viewing '+id);

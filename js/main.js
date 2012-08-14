@@ -43,7 +43,5 @@ require(
 
         // Initialise the AppView
         $(".no-js").remove();
-        var view = new AppView({el: $('div[data-view=AppView]')});
-        Router.view = view;
     }
 );
