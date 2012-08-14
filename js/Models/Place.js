@@ -73,12 +73,13 @@ define(['Backbone', 'Core/Location', 'Underscore', 'Mootools', 'Core/Sync'], fun
                 tags.push(tag);
             }
 
-            this.set({'tags': tags});
+            this.save({'tags': tags});
         },
         removeTag: function(tag) {
             tag = ''+tag; // Make sure it is a string
 
             var tags = this.get('tags');
+
             if(!instanceOf(tags, Array)) {
                 tags = [];
                 return;
@@ -88,6 +89,8 @@ define(['Backbone', 'Core/Location', 'Underscore', 'Mootools', 'Core/Sync'], fun
             if(tags.contains(tag)) {
                 tags.erase(tag);
             }
+
+            this.save({'tags': tags});
         },
         hasTag: function(tag) {
             tags = this.get('tags');
@@ -103,7 +106,7 @@ define(['Backbone', 'Core/Location', 'Underscore', 'Mootools', 'Core/Sync'], fun
                 location = new Location(lat, lon);
             }
 
-            this.set('location', location);
+            this.save({'location': location});
         }
     });
 });
