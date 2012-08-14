@@ -54,7 +54,7 @@
 @baseLineHeight:        18px;
 @altFontFamily:         @serifFontFamily;
 
-@headingsFontFamily:    'Leckerli One', @sansFontFamily; // empty to use BS default, @baseFontFamily
+@headingsFontFamily:    @sansFontFamily; // empty to use BS default, @baseFontFamily
 @headingsFontWeight:    bold;    // instead of browser default, bold
 @headingsColor:         inherit; // empty to use BS default, @textColor
 
@@ -155,6 +155,7 @@
 @navbarSearchBorder:              darken(@navbarSearchBackground, 30%);
 @navbarSearchPlaceholderColor:    #ccc;
 @navbarBrandColor:                @black;
+@navbarBrandFont:                 'Leckerli One', @headingsFontFamily;
 
 
 // Hero unit
