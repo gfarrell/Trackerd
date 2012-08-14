@@ -7666,6 +7666,22 @@ body {
 }
 /* ===== Primary Styles ===== */
 /*
+    Controls LESS
+    -------------
+
+    Contains styles for customised controls
+
+    @file       controls.less
+    @package    Trackerd
+    @author     Gideon Farrell <me@gideonfarrell.co.uk>
+ */
+.control-toggle-active,
+.control-toggle-active i,
+.control-toggle-active a {
+  color: #049cdb;
+  text-shadow: 0 0 5px #049cdb;
+}
+/*
     Places LESS
     -----------
 
