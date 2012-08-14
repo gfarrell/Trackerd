@@ -19,6 +19,7 @@ define(
                 this.model.on('change', this.render, this);
                 this.model.on('destroy', this.remove, this);
 
+                this.$el.attr('data-id', this.model.cid);
 
                 this.$note = $('<span class="place-note"></span>');
                 this.$tags = $('<span class="place-tags"></span>');
