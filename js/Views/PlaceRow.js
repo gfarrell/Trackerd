@@ -21,10 +21,11 @@ define(
 
                 this.$el.attr('data-id', this.model.cid);
 
-                this.$note = $('<span class="place-note"></span>');
-                this.$tags = $('<span class="place-tags"></span>');
+                this.$note = $('<span class="note"></span>');
+                this.$tags = $('<span class="tags"></span>');
+                this.$dist = $('<span class="distance"></span>');
 
-                this.$el.append(this.$note, this.$tags);
+                this.$el.append(this.$note, this.$tags, this.$dist);
 
                 this.render();
             },
