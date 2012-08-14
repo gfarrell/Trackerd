@@ -7759,7 +7759,8 @@ body {
 }
 .control-toggle-active,
 .control-toggle-active i,
-.control-toggle-active a {
+.control-toggle-active a,
+.control-toggle-active span {
   color: #049cdb;
   text-shadow: 0 0 5px #049cdb;
 }
