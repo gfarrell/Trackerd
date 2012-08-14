@@ -48,6 +48,6 @@ require(
         });
 
         // Initialise the AppView
-        $(".no-js").remove();
+        $(".loader").remove();
     }
 );
