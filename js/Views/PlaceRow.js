@@ -32,8 +32,11 @@ define(
 
             render: function() {
                 this.$note.html(this.model.get('note'));
-
                 this.$tags.html(this.model.get('tags').join(', '));
+            },
+
+            renderDistance: function() {
+                this.$dist.html(this.model.getDistance().round(2)+'km');
             }
         });
     }
