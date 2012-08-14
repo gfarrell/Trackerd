@@ -15,6 +15,12 @@ define(['Mootools'], function() {
         },
         toDegrees: function() {
             return this * 180 / Math.PI;
+        },
+        round: function(places) {
+            if(places === undefined) places = 0;
+            var exp = Math.pow(10, places);
+
+            return Math.round( this*exp ) / exp;
         }
     });
 });
