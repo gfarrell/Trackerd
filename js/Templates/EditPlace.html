@@ -1,0 +1,10 @@
+<div class="edit-window">
+    <h2><% if(edit) print('Edit Place'); else print('Add a new place'); %></h2>
+    <form action="#">
+        <!-- Note Area -->
+        <textarea name="note"><% if(edit) print(note); %></textarea>
+
+        <!-- Tags Area -->
+        <input name="tags" value="<% if(edit) print(tags); %>" />
+    </form>
+</div>
