@@ -9,9 +9,11 @@
     @author     Gideon Farrell <me@gideonfarrell.co.uk>
  */
 
-define(['Backbone', 'Models/Place', 'Core/Store', 'Core/Sync'], function(Backbone, Place, Store) {
-    return Backbone.Collection.extend({
+define(['Backbone', 'Models/Place', 'Core/Store'], function(Backbone, Place, Store) {
+    var Places = Backbone.Collection.extend({
         model: Place,
         localStorage: (new Store('Trackerd.Places'))
     });
+
+    return new Places();
 });
