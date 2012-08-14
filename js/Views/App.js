@@ -2,15 +2,15 @@
     AppView
     -------
 
-    @requires   Backbone, Views/ControlBar
+    @requires   Backbone, Views/ControlBar, Core/Location
     @file       App.js
     @package    Trackerd/Views
     @author     Gideon Farrell <me@gideonfarrell.co.uk>
  */
 
 define(
-    ['Backbone','Views/ControlBar'],
-    function(Backbone, ControlBarView) {
+    ['Backbone','Views/ControlBar', 'Core/Location'],
+    function(Backbone, ControlBarView, Location) {
         return Backbone.View.extend({
             tagName: 'div',
             className: 'Trackerd',
@@ -18,6 +18,8 @@ define(
             initialize: function(attrs) {
                 this.ControlBar = new ControlBarView();
                 this.ControlBar.$el.appendTo(this.$el);
+
+                this.ControlBar.on('action:toggleTracking', this.toggleTracking);
 
                 this.$main = $(this.make('div', {'class':'container'}));
                 this.$main.appendTo(this.$el);
@@ -50,6 +52,12 @@ define(
                     this._loaded.remove();
                 }
                 this.$main.empty();
+            },
+
+            toggleTracking: function() {
+                if(instanceOf(window.LocationTracker, Location)) {
+                    window.LocationTracker.trackLocation();
+                }
             }
         });
     }
