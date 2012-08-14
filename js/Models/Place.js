@@ -65,6 +65,8 @@ define(['Backbone', 'Core/Location', 'Underscore', 'Mootools', 'Core/Sync'], fun
             var tags = this.get('tags');
             if(!instanceOf(tags, Array)) {
                 tags = [];
+            } else {
+                tags = tags.clone();
             }
 
             if(!tags.contains(tag)) {
@@ -77,6 +79,12 @@ define(['Backbone', 'Core/Location', 'Underscore', 'Mootools', 'Core/Sync'], fun
             tag = ''+tag; // Make sure it is a string
 
             var tags = this.get('tags');
+            if(!instanceOf(tags, Array)) {
+                tags = [];
+                return;
+            } else {
+                tags = tags.clone();
+            }
             if(tags.contains(tag)) {
                 tags.erase(tag);
             }
