@@ -22,6 +22,10 @@ define(['Mootools', 'Core/Number.extend'], function() {
         initialize: function(latitude, longitude) {
             var position = [];
 
+            this._activeTracking = false;
+            this._timer = null;
+            this._watchid = null;
+
             Object.defineProperty(this, 'latitude', {
                 get: function() {
                     return position[0];
@@ -143,14 +147,30 @@ define(['Mootools', 'Core/Number.extend'], function() {
         },
 
         setToCurrent: function() {
+            this.trackLocation({continuous: false});
+        },
+
+        trackLocation: function(options) {
+            options = Object.merge({
+                continuous: true,
+                mode:       'passive'
+            }, options);
+
             if(navigator.geolocation) {
-                var l = this,
-                    watchid = navigator.geolocation.watchPosition(
+                if(!this._activeTracking) this.stopTracking();
+
+                if(options.mode == 'active') {
+                    this._timer = window.setInterval(this.setToCurrent.bind(this), Location.GEO_TIMEOUT+1000);
+                    this._activeTracking = true;
+                } else {
+                    var l = this;
+                    this._watchid = navigator.geolocation.watchPosition(
                         function(position) { // Success function
                             if(position.coords.accuracy < Location.GEO_THRESHOLD) {
-                                //this.accuracy = position.coords.accuracy;
                                 l.position = [position.coords.latitude, position.coords.longitude];
-                                navigator.geolocation.clearWatch(watchid);
+                                if(options.continuous === false) {
+                                    navigator.geolocation.clearWatch(l._watchid);
+                                }
                             }
                         },
                         function(error) { // Error function
@@ -160,9 +180,23 @@ define(['Mootools', 'Core/Number.extend'], function() {
                             'enableHighAccuracy': true, 'timeout': Location.GEO_TIMEOUT, 'maximumAge': 0
                         }
                     );
+                }
             } else {
                 throw new Error('Geolocation is not available in this browser.');
             }
+        },
+
+        stopTracking: function() {
+            if(this._watchid !== null) {
+                navigator.geolocation.clearWatch(this._watchid);
+                this._watchid = null;
+            }
+            if(this._timer !== null) {
+                window.clearInterval(this._timer);
+                this._timer = null;
+            }
+
+            this._activeTracking = false;
         }
     });
 
