@@ -17,7 +17,7 @@ define(
 
             initialize: function() {
                 this._rows = [];
-                Places.on('all', this.render.bind(this));
+                Places.on('all', this.render, this);
                 Places.fetch();
             },
 
