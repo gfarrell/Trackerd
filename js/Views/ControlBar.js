@@ -27,7 +27,10 @@ define(['Backbone', 'jQuery'], function(Backbone) {
 
             // Put all these elements together
             this.$el.append(inner); inner.append(cont); cont.append(brand, nav);
-            
+
+            // Dummy this
+            var _view = this;
+
             // Create the nav menu
             menu.each(function(opts) {
                 var item = $(
@@ -37,14 +40,15 @@ define(['Backbone', 'jQuery'], function(Backbone) {
 
                 item.bind('click', function() {
                     Backbone.history.navigate(opts.action);
+                    _view.makeButtonActive(opts.action);
                 });
                 item.appendTo(nav);
             });
         },
 
-        addPlace: function() {},
-        listPlaces: function() {},
-        nearMe: function() {},
-        share: function() {}
+        makeButtonActive: function(action) {
+            this.$el.find('li').removeClass('active');
+            this.$el.find('li:has(a[data-action="'+action+'"])').addClass('active');
+        }
     });
 });
