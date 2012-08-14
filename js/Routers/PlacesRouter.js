@@ -21,17 +21,12 @@ define(
                 'places/edit/:id':    'edit'
             },
 
-            initialize: function() {
-                this.model = Place;
-                this.Places = new Places();
-            },
-
             index: function() {
-                this.Places.fetch();
+                Places.fetch();
 
                 // Instantiate the list view
                 var view = new PlacesListView({
-                    collection: this.Places
+                    collection: Places
                 });
 
             },
