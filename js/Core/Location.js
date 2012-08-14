@@ -72,6 +72,13 @@ define(['Mootools', 'Core/Number.extend'], function() {
             });
 
             this.position = [latitude, longitude];
+        },
+
+        toString: function() {
+            return '['+this.latitude+','+this.longitude+']';
+        },
+        toJSON: function() {
+            return (this.position);
         }
     });
 
