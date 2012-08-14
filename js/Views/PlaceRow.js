@@ -33,6 +33,8 @@ define(
             render: function() {
                 this.$note.html(this.model.get('note'));
                 this.$tags.html(this.model.get('tags').join(', '));
+
+                this.renderDistance();
             },
 
             renderDistance: function() {
