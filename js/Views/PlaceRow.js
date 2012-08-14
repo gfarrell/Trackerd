@@ -2,7 +2,7 @@
     PlaceRowView
     --------------
 
-    @requires   Backbone, Places, Place
+    @requires   Backbone, Place
     @file       PlaceRowView.js
     @package    Trackerd/Views
     @author     Gideon Farrell <me@gideonfarrell.co.uk>
