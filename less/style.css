@@ -7687,11 +7687,11 @@ body {
   height: 25px;
   margin-top: -5px;
   margin-right: 10px;
-  -webkit-animation: fadein 2s infinite alternate;
-  -moz-animation: fadein 2s infinite alternate;
-  -ms-animation: fadein 2s infinite alternate;
-  -o-animation: fadein 2s infinite alternate;
-  animation: fadein 2s infinite alternate;
+  -webkit-animation: fadein 1s infinite alternate;
+  -moz-animation: fadein 1s infinite alternate;
+  -ms-animation: fadein 1s infinite alternate;
+  -o-animation: fadein 1s infinite alternate;
+  animation: fadein 1s infinite alternate;
 }
 .loader .block:nth-child(1) {
   -webkit-animation-delay: 0s;
@@ -7719,42 +7719,42 @@ body {
 }
 @-webkit-keyframes fadein {
   0% {
-    opacity: 0;
+    opacity: 1;
   }
   100% {
-    opacity: 1;
+    opacity: 0;
   }
 }
 @-moz-keyframes fadein {
   0% {
-    opacity: 0;
+    opacity: 1;
   }
   100% {
-    opacity: 1;
+    opacity: 0;
   }
 }
 @-ms-keyframes fadein {
   0% {
-    opacity: 0;
+    opacity: 1;
   }
   100% {
-    opacity: 1;
+    opacity: 0;
   }
 }
 @-o-keyframes fadein {
   0% {
-    opacity: 0;
+    opacity: 1;
   }
   100% {
-    opacity: 1;
+    opacity: 0;
   }
 }
 @keyframes fadein {
   0% {
-    opacity: 0;
+    opacity: 1;
   }
   100% {
-    opacity: 1;
+    opacity: 0;
   }
 }
 .control-toggle-active,
