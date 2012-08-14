@@ -31,7 +31,10 @@ define(['Backbone', 'Core/Location', 'Underscore', 'Mootools', 'Core/Sync'], fun
             }
 
             // Add an event to the location to save on update
-            location_obj.addEvent('update', this.save.bind(this));
+            location_obj.addEvent('update', function() {
+                this.save({location: this.get('location')});
+                this.trigger('change');
+            }, this);
 
             // Make sure the tag list is unique
             tags_list = _.uniq(tags_list);
@@ -100,13 +103,12 @@ define(['Backbone', 'Core/Location', 'Underscore', 'Mootools', 'Core/Sync'], fun
         setLocation: function(lat, lon) {
             var location = this.get('location');
             if(instanceOf(location, Location)) {
-                location.latitude = lat;
-                location.longitude = lon;
+                location.position = [lat, long];
             } else {
                 location = new Location(lat, lon);
             }
+        },
 
-            this.save({'location': location});
         getDistance: function() {
             if(instanceOf(window.LocationTracker, Location)) {
                 return window.LocationTracker.distanceTo(this.attributes.location);
