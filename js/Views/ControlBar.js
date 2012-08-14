@@ -14,10 +14,6 @@ define(['Backbone', 'jQuery'], function(Backbone) {
         className: 'navbar navbar-fixed-top',
 
         initialize: function() {
-            this.render();
-        },
-
-        render: function() {
             var inner   = $(this.make('div', {'class':'navbar-inner'})),
                 cont    = $(this.make('div', {'class':'container'})),
                 brand   = $(this.make('a', {'class':'brand', 'href':'#'}, 'Trckd')),
