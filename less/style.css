@@ -7664,6 +7664,14 @@ body {
     overflow: visible !important;
   }
 }
-/* ===== Primary Styles ========================================================
-   Author:
-   ========================================================================== */
+/* ===== Primary Styles ===== */
+/*
+    Places LESS
+    -----------
+
+    Contains styles for Place-related views.
+
+    @file       places.less
+    @package    Trackerd
+    @author     Gideon Farrell <me@gideonfarrell.co.uk>
+ */
