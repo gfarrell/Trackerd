@@ -107,6 +107,12 @@ define(['Backbone', 'Core/Location', 'Underscore', 'Mootools', 'Core/Sync'], fun
             }
 
             this.save({'location': location});
+        getDistance: function() {
+            if(instanceOf(window.LocationTracker, Location)) {
+                return window.LocationTracker.distanceTo(this.attributes.location);
+            } else {
+                throw new Error('LocationTracker is not initialised, cannot get current location.');
+            }
         }
     });
 });
