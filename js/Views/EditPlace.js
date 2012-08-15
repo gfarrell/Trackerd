@@ -39,6 +39,9 @@ define(
                 }
 
                 this.$el.append(this.Template(template_opts));
+
+                this.$tags = this.$el.find('input[name=tags]');
+                this.$note = this.$el.find('textarea[name=note]');
             },
 
             primeForNew: function() {
@@ -55,8 +58,28 @@ define(
                 this.render();
             },
 
-            save: function() {},
-            cancel: function() {}
+            preSave: function() {
+                this.$tags.val(this.$tags.val().replace(/,(\s+)/g, ','));
+                if(this.$note.val() === '') {
+                    alert('Note cannot be empty.');
+                }
+            },
+
+            save: function() {
+                this.preSave();
+
+                if(!this._new) {
+                    this.trigger('save', this.model);
+                } else {
+                    this.trigger('add', {
+                        note: this.$note.val(),
+                        tags: this.$tags.val()
+                    });
+                }
+            },
+            cancel: function() {
+                this.trigger('cancel');
+            }
         });
     }
 );
