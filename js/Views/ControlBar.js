@@ -21,10 +21,10 @@ define(['Backbone', 'jQuery'], function(Backbone) {
                 brand   = $(this.make('a', {'class':'brand', 'href':'#'}, 'Trckd')),
                 nav     = $(this.make('ul', {'class':'nav pull-right'})),
                 menu    = [
-                    {'action':'places/add', 'icon':'plus', 'text':'Add a place'},
-                    {'action':'places/index', 'icon':'reorder', 'text':'My Places'},
-                    {'action':'places/nearMe', 'icon':'search', 'text':'Near Me'},
-                    {'action':':toggleTracking', 'icon':'map-marker', 'text':'Track my location'}
+                    {'action':'add', 'icon':'plus', 'text':'Add a place'},
+                    {'action':'list', 'icon':'reorder', 'text':'My Places'},
+                    {'action':'nearMe', 'icon':'search', 'text':'Near Me'},
+                    {'action':'toggleTracking', 'icon':'map-marker', 'text':'Track my location'}
                 ];
 
             // Put all these elements together
@@ -40,21 +40,16 @@ define(['Backbone', 'jQuery'], function(Backbone) {
                                 .format(opts.action, opts.icon, opts.text)
                             );
 
-                // Two types of action, navigation and event (self-explanatory, right?)
-                if(opts.action.indexOf(':') === 0) {        // Events start with a colon
-                    item.bind('click', function() {
-                        if(this.indexOf(':toggle') === 0) {
-                            _view.toggleButton(this);       // If this is a toggle event, then we should toggle the switch class
-                        }
+                // All button presses will trigger an event in order that the AppView can deal with it (and anyone else who's listening)
+                item.bind('click', function() {
+                    if(this.indexOf('toggle') === 0) {
+                        _view.toggleButton(this);
+                    } else {
+                        _view.makeButtonActive(this);
+                    }
 
-                        _view.trigger('action'+this);       // Now trigger the event
-                    }.bind(opts.action));
-                } else {
-                    item.bind('click', function() {
-                        Backbone.history.navigate(this);    // Tell Backbone to go there
-                        _view.makeButtonActive(this);       // And let's make the button active too
-                    }.bind(opts.action));
-                }
+                    _view.trigger('action:'+this);
+                }.bind(opts.action));
                 item.appendTo(nav);                         // Finally add the control to the nav menu
             });
         },
