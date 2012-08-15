@@ -34,7 +34,7 @@ define(['Backbone', 'Core/Location', 'Underscore', 'Mootools', 'Core/Sync'], fun
             location_obj.addEvent('update', function() {
                 this.save({location: this.get('location')});
                 this.trigger('change');
-            }, this);
+            }.bind(this));
 
             // Make sure the tag list is unique
             tags_list = _.uniq(tags_list);
