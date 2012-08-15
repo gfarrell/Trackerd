@@ -42,6 +42,8 @@ define(
 
                 this.$tags = this.$el.find('input[name=tags]');
                 this.$note = this.$el.find('textarea[name=note]');
+
+                this.delegateEvents();
             },
 
             primeForNew: function() {
