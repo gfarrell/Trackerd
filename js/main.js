@@ -41,13 +41,32 @@ require(
         window.LocationTracker = new Location(0,0);
         window.LocationTracker.setToCurrent();
 
-        var Router = new PlacesRouter();
+        // Initialise an event aggregator and a router
+        var NotificationCentre = _.extend({}, Backbone.Events),
+            Router = new PlacesRouter({
+                __nc: NotificationCentre
+            });
+
+        // Set up toggle listener for toggleTracking
+        NotificationCentre.on('toggleTracking', function() {
+            if(window.LocationTracker.tracking) {
+                window.Locationtracker.stopTracking();
+            } else {
+                window.LocationTracker.trackLocation();
+            }
+        });
+
+        // Set up debug listener
+        NotificationCentre.on('all', function(e, args) { console.log('Notify: '+e+(args !== undefined && args.length > 0 ? ' with args: '+args.toString() : '')+'.'); });
+
+        // Set up a listener for current location updates
+        window.LocationTracker.addEvent('update', function() { NotificationCentre.trigger('locationUpdate'); });
 
         Backbone.history.start({
             root: (window.location.host.indexOf('localhost') != -1 || window.location.host.indexOf('gidbook') != -1) ? '/trackerd/' : '/'
         });
 
-        // Initialise the AppView
+        // Clear the loader
         $(".loader").remove();
     }
 );
