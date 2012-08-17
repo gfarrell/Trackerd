@@ -16,8 +16,10 @@ define(
                 '*filter': 'index'
             },
 
-            initialize: function() {
-                this.AppView = new AppView({el: $('div[data-view=AppView]')});
+            initialize: function(options) {
+                this.__nc = options.__nc;
+
+                this.AppView = new AppView({el: $('div[data-view=AppView]'), __nc: options.__nc});
             },
 
             index: function(filter) {
