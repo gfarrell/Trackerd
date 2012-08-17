@@ -1,0 +1,27 @@
+CACHE MANIFEST
+index.html
+
+less/style.css
+
+js/main.js
+
+js/libs/modernizr-2.5.3-response-1.1.0.min.js
+js/libs/require/require.js
+js/libs/require/text.js
+js/libs/jquery-1.7.2.js
+js/libs/underscore-min.js
+js/libs/backbone-min.js
+js/libs/mootools/core.js
+js/libs/mootools/mootools-core-1.4.5-full-nocompat-yc.js
+
+js/Core/String.extend.js
+js/Core/Number.extend.js
+js/Core/Store.js
+js/Core/Sync.js
+js/Core/Location.js
+
+js/Models/Place.js
+
+js/Collections/Places.js
+
+js/Routers/PlacesRouter.js
