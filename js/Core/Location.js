@@ -22,6 +22,7 @@ define(['Mootools', 'Core/Number.extend'], function() {
         initialize: function(latitude, longitude) {
             var position = [];
 
+            this.tracking = false;
             this._activeTracking = false;
             this._timer = null;
             this._watchid = null;
@@ -184,6 +185,8 @@ define(['Mootools', 'Core/Number.extend'], function() {
             } else {
                 throw new Error('Geolocation is not available in this browser.');
             }
+
+            this.tracking = true;
         },
 
         stopTracking: function() {
@@ -197,6 +200,7 @@ define(['Mootools', 'Core/Number.extend'], function() {
             }
 
             this._activeTracking = false;
+            this.tracking = false;
         }
     });
 
