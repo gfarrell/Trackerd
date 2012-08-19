@@ -12,10 +12,11 @@ define(
     function(Backbone, Place, row_html) {
         return Backbone.View.extend({
             tagName: 'li',
-            className: 'PlaceRow',
+            className: 'PlaceRow container',
 
             events: {
-                'click': 'edit'
+                'click .control.edit':   'edit',
+                'click .control.delete': 'confirmDelete'
             },
 
             initialize: function(options) {
@@ -47,6 +48,10 @@ define(
 
             edit: function() {
                 this.__nc.trigger('editPlace', this.model.cid);
+            },
+
+            confirmDelete: function() {
+                this.__nc.trigger('confirmDelete', this.model);
             }
         });
     }
