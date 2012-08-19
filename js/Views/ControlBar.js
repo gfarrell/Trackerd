@@ -15,15 +15,17 @@ define(['Backbone', 'jQuery'], function(Backbone) {
 
         events: {},
 
-        initialize: function() {
+        initialize: function(options) {
+            this.__nc = options.__nc;
+
             var inner   = $(this.make('div', {'class':'navbar-inner'})),
                 cont    = $(this.make('div', {'class':'container'})),
                 brand   = $(this.make('a', {'class':'brand', 'href':'#'}, 'Trckd')),
                 nav     = $(this.make('ul', {'class':'nav pull-right'})),
                 menu    = [
-                    {'action':'add', 'icon':'plus', 'text':'Add a place'},
-                    {'action':'list', 'icon':'reorder', 'text':'My Places'},
-                    {'action':'nearMe', 'icon':'search', 'text':'Near Me'},
+                    {'action':'addPlace', 'icon':'plus', 'text':'Add a place'},
+                    {'action':'showList', 'icon':'reorder', 'text':'My Places'},
+                    {'action':'filterNearby', 'icon':'search', 'text':'Near Me'},
                     {'action':'toggleTracking', 'icon':'map-marker', 'text':'Track my location'}
                 ];
 
@@ -42,13 +44,13 @@ define(['Backbone', 'jQuery'], function(Backbone) {
 
                 // All button presses will trigger an event in order that the AppView can deal with it (and anyone else who's listening)
                 item.bind('click', function() {
-                    if(this.indexOf('toggle') === 0) {
-                        _view.toggleButton(this);
-                    } else {
+                    if(this.indexOf('toggle') === 0) {      // Some actions will be toggle based
+                        _view.toggleButton(this);           // -> toggle the button state
+                    } else {                                // If not, the buttons will still need an active state
                         _view.makeButtonActive(this);
                     }
 
-                    _view.trigger('action:'+this);
+                    _view.__nc.trigger(this);
                 }.bind(opts.action));
                 item.appendTo(nav);                         // Finally add the control to the nav menu
             });
