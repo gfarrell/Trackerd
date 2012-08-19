@@ -108,7 +108,7 @@ define(
             showList: function() {
                 this.lazyLoadView('PlacesList');
             },
-            filterNearMe: function() {
+            filterNearby: function() {
                 console.log('What\'s nearby?');
             },
 
