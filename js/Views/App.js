@@ -92,6 +92,8 @@ define(
 
             showAddWindow: function() {
                 this.lazyLoadView('EditPlace');
+
+                this.Views.EditPlace.primeForNew();
             },
             showEditWindow: function(cid) {
                 this.lazyLoadView('EditPlace');
