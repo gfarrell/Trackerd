@@ -17,7 +17,8 @@ define(
 
             events: {
                 'click .btn[data-action=save]':   'save',
-                'click .btn[data-action=cancel]': 'cancel'
+                'click .btn[data-action=cancel]': 'cancel',
+                'submit form': 'save'
             },
 
             initialize: function() {
