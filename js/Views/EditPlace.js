@@ -9,8 +9,8 @@
  */
 
 define(
-    ['Underscore', 'Backbone','Collections/Places','Models/Place', 'text!Templates/EditPlace.html'],
-    function(_U, Backbone, Places, Place, edit_html) {
+    ['Underscore', 'Backbone', 'Core/Location', 'Collections/Places','Models/Place', 'text!Templates/EditPlace.html'],
+    function(_U, Backbone, Location, Places, Place, edit_html) {
         return Backbone.View.extend({
             tagName: 'div',
             className: 'edit-window',
