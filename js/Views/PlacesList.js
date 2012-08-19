@@ -15,7 +15,9 @@ define(
             tagName: 'ul',
             className: 'PlacesList',
 
-            initialize: function() {
+            initialize: function(options) {
+                this.__nc = options.__nc;
+
                 this._rows = [];
                 Places.on('all', this.render, this);
                 Places.fetch();
@@ -24,11 +26,13 @@ define(
             render: function() {
                 Places.each(function(pl) {
                     if(!instanceOf(this._rows[pl.cid], PlaceRow)) {
-                        var row = new PlaceRow({model: pl});
+                        var row = new PlaceRow({model: pl, __nc: this.__nc});
                         this._rows[pl.cid] = row;
                         row.$el.appendTo(this.$el);
                     }
                 }, this);
+
+                this.delegateEvents();
             }
         });
     }
