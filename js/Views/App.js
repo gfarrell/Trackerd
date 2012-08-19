@@ -8,11 +8,15 @@
  */
 
 define(
-    ['Backbone', 'Core/Location', 'Collections/Places', 'Views/ControlBar', 'Views/EditPlace', 'Views/PlacesList'],
-    function(Backbone, Location, Places, ControlBarView, EditPlaceView, PlacesListView) {
+    ['Backbone', 'Core/Location', 'Collections/Places', 'Views/ControlBar', 'Views/EditPlace', 'Views/PlacesList', 'text!Templates/DeleteModal.html'],
+    function(Backbone, Location, Places, ControlBarView, EditPlaceView, PlacesListView, DeleteModalHtml) {
         return Backbone.View.extend({
             tagName: 'div',
             className: 'Trackerd',
+
+            events: {
+                'click .delete-confirm': 'deletePlace'
+            },
 
             initialize: function(attrs) {
                 this.__nc = attrs.__nc;                                         // Store the event aggregator
@@ -21,8 +25,9 @@ define(
                 this.__nc.on('showList', this.showList, this);                  // showList -> show the list
                 this.__nc.on('editPlace', this.showEditWindow, this);           // editPlace -> show the edit window (EditPlaceView)
                 this.__nc.on('deletePlace', this.placeDeleted, this);           // deletePlace -> trigger delete action on Place
-                this.__nc.on('addPlace', this.showAddWindow, this);            // newPlace -> show the new place window (EditPlaceView)
+                this.__nc.on('addPlace', this.showAddWindow, this);             // newPlace -> show the new place window (EditPlaceView)
                 this.__nc.on('filterNearby', this.filterNearby, this);          // filterNearby -> run a filter on the list
+                this.__nc.on('confirmDelete', this.confirmDelete, this);        // confirmDelete -> show a delete confirmation dialogue using Bootstrap.modal
 
                 this.Views = {};                                                // this.Views will hold the view classes that we will use
 
@@ -31,6 +36,9 @@ define(
 
                 this.$main = $(this.make('div', {'class':'container'}));        // Create a main .container div
                 this.$main.appendTo(this.$el);                                  // And add it into the $el
+
+                this.$deleteModal = $(DeleteModalHtml);                         // Create a modal window from the loaded html
+                this.$deleteModal.appendTo(this.$el);                           // Append it to the $el
 
                 this.render();                                                  // Finally render the view, now that we're set up :)
             },
@@ -113,6 +121,14 @@ define(
             },
             filterNearby: function() {
                 console.log('What\'s nearby?');
+            },
+
+            confirmDelete: function(model) {
+                this.$deleteModal.data('model', model);
+                this.$deleteModal.modal('show');
+            },
+            deletePlace: function() {
+                this.$deleteModal.data('model').destroy();
             }
         });
     }
