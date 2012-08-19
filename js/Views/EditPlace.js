@@ -21,7 +21,8 @@ define(
                 'submit form': 'save'
             },
 
-            initialize: function() {
+            initialize: function(options) {
+                this.__nc = options.__nc;
                 this.Template = _.template(edit_html);
                 this._new = true;
                 this.render();
