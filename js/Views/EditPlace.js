@@ -71,8 +71,17 @@ define(
                 this.preSave();
 
                 if(!this._new) {
+                    this.model.save({
+                        note: this.$note.val(),
+                        tags: this.$tags.val().split(',')
+                    });
                     this.trigger('save', this.model);
                 } else {
+                    Places.create({
+                        note: this.$note.val(),
+                        tags: this.$tags.val().split(','),
+                        location: Location.newFromCurrentLocation()
+                    });
                     this.trigger('add', {
                         note: this.$note.val(),
                         tags: this.$tags.val()

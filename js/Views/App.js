@@ -72,21 +72,15 @@ define(
             },
 
             __bootstrapEditPlace: function(view) {
-                view.on('save', this.showList, this);
-                view.on('add', function(data) {
-                    Places.create({
-                        note: data.note,
-                        tags: data.tags.split(','),
-                        location: Location.newFromCurrentLocation()
-                    });
-                    this.showList();
-                }, this);
+                view.on('all', this.showList, this);    // add, save, cancel events need list showing.
             },
 
             render: function() {
                 if(instanceOf(this._loaded, Backbone.View)) {
                     this._loaded.render();
                 }
+
+                this.delegateEvents();
             },
 
             clear: function() {
