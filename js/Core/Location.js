@@ -130,7 +130,7 @@ define(['Mootools', 'Core/Number.extend'], function() {
     };
 
     Location.GEO_TIMEOUT = 1000*60*2;
-    Location.GEO_THRESHOLD = 100;
+    Location.GEO_THRESHOLD = 25;
     Location.GEO_ERRORS = {
         1: 'Permission denied',
         2: 'Position unavailable',
