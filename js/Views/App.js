@@ -62,7 +62,7 @@ define(
                 }
 
                 if(!instanceOf(this.Views[name], view)) {
-                    this.Views[name] = new view();
+                    this.Views[name] = new view({__nc: this.__nc});
                     if(instanceOf(this[func], Function)) {
                         this[func].call(this, this.Views[name]);
                     }
