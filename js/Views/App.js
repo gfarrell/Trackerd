@@ -18,6 +18,7 @@ define(
                 this.__nc = attrs.__nc;                                         // Store the event aggregator
 
                 // Register for some events
+                this.__nc.on('showList', this.showList, this);                  // showList -> show the list
                 this.__nc.on('editPlace', this.showEditWindow, this);           // editPlace -> show the edit window (EditPlaceView)
                 this.__nc.on('deletePlace', this.placeDeleted, this);           // deletePlace -> trigger delete action on Place
                 this.__nc.on('addPlace', this.showAddWindow, this);            // newPlace -> show the new place window (EditPlaceView)
