@@ -14,32 +14,24 @@ define(
             tagName: 'div',
             className: 'Trackerd',
 
-            actions: {
-                'add': 'showAddWindow',
-                'list': 'showList',
-                'nearMe': 'filterNearMe'
-            },
-
             initialize: function(attrs) {
-                this.Views = {};
+                this.__nc = attrs.__nc;                                         // Store the event aggregator
 
-                this.ControlBar = new ControlBarView();
-                this.ControlBar.$el.appendTo(this.$el);
+                // Register for some events
+                this.__nc.on('editPlace', this.showEditWindow, this);           // editPlace -> show the edit window (EditPlaceView)
+                this.__nc.on('deletePlace', this.placeDeleted, this);           // deletePlace -> trigger delete action on Place
+                this.__nc.on('addPlace', this.showAddWindow, this);            // newPlace -> show the new place window (EditPlaceView)
+                this.__nc.on('filterNearby', this.filterNearby, this);          // filterNearby -> run a filter on the list
 
-                this.ControlBar.on('action:toggleTracking', this.toggleTracking);
+                this.Views = {};                                                // this.Views will hold the view classes that we will use
 
-                Object.each(this.actions, function(method, action) {
-                    this.ControlBar.on('action:'+action, this[method], this);
-                }, this);
+                this.ControlBar = new ControlBarView({__nc: this.__nc});        // We need to initialise the control bar, passing the event aggregator
+                this.ControlBar.$el.appendTo(this.$el);                         // Bring the ControlBar into the document
 
-                this.$main = $(this.make('div', {'class':'container'}));
-                this.$main.appendTo(this.$el);
+                this.$main = $(this.make('div', {'class':'container'}));        // Create a main .container div
+                this.$main.appendTo(this.$el);                                  // And add it into the $el
 
-                if(instanceOf(attrs.load, Backbone.View)) {
-                    this.loadView(attrs.load);
-                }
-
-                this.render();
+                this.render();                                                  // Finally render the view, now that we're set up :)
             },
 
             loadView: function(view) {
