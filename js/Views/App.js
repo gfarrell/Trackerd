@@ -110,12 +110,6 @@ define(
             },
             filterNearby: function() {
                 console.log('What\'s nearby?');
-            },
-
-            toggleTracking: function() {
-                if(instanceOf(window.LocationTracker, Location)) {
-                    window.LocationTracker.trackLocation();
-                }
             }
         });
     }
