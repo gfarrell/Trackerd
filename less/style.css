@@ -7774,3 +7774,36 @@ body {
     @package    Trackerd
     @author     Gideon Farrell <me@gideonfarrell.co.uk>
  */
+.PlacesList {
+  list-style-type: none;
+  margin: 0;
+}
+.PlacesList .PlaceRow {
+  display: block;
+  background: #f9f9f9;
+  padding: 0.5em;
+  border-bottom: thin solid #eeeeee;
+}
+.PlacesList .PlaceRow:last-child {
+  border-bottom: none;
+}
+.PlacesList .PlaceRow:nth-child(2n) {
+  background: transparent;
+}
+.PlacesList .PlaceRow .note {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 0.1em;
+}
+.PlacesList .PlaceRow .tags .tag {
+  font-style: italic;
+  padding: 0 0.5em;
+  margin-right: 0.5em;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background: #ffc40d;
+}

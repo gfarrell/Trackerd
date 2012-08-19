@@ -9,3 +9,38 @@
     @author     Gideon Farrell <me@gideonfarrell.co.uk>
  */
 
+.PlacesList {
+    list-style-type: none;
+    margin: 0;
+
+    .PlaceRow {
+        display: block;
+        background: @tableBackgroundAccent;
+        padding: 0.5em;
+
+        border-bottom: thin solid @grayLighter;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        &:nth-child(2n) {
+            background: @tableBackground;
+        }
+
+        .note {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 0.1em;
+        }
+
+        .tags .tag {
+            font-style: italic;
+            padding: 0 0.5em;
+            margin-right:0.5em;
+
+            .border-radius(5px);
+            background: @yellow;
+        }
+    }
+}
