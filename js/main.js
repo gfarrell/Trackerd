@@ -50,7 +50,7 @@ require(
         // Set up toggle listener for toggleTracking
         NotificationCentre.on('toggleTracking', function() {
             if(window.LocationTracker.tracking) {
-                window.Locationtracker.stopTracking();
+                window.LocationTracker.stopTracking();
             } else {
                 window.LocationTracker.trackLocation();
             }
