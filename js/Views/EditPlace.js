@@ -55,7 +55,7 @@ define(
 
             primeForEdit: function(model) {
                 this.model = (instanceOf(model, Backbone.Model) ? model : null);
-                this._new = (this.model !== null);
+                this._new = (this.model === null);
 
                 this.render();
             },
