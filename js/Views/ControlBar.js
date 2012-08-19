@@ -50,7 +50,7 @@ define(['Backbone', 'jQuery'], function(Backbone) {
                         _view.makeButtonActive(this);
                     }
 
-                    _view.__nc.trigger(this);
+                    _view.__nc.trigger(this);               // Triger the action on the event aggregator
                 }.bind(opts.action));
                 item.appendTo(nav);                         // Finally add the control to the nav menu
             });
