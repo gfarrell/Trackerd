@@ -34,13 +34,42 @@
             margin-bottom: 0.1em;
         }
 
-        .tags .tag {
+        .distance {
+            font-weight: normal;
             font-style: italic;
+            font-size:0.8em;
+        }
+
+        .tags .tag {
             padding: 0 0.5em;
             margin-right:0.5em;
 
             .border-radius(5px);
             background: @yellow;
+        }
+    }
+}
+
+.controls {
+    list-style-type: none;
+
+    li {
+        font-size: 1.25em;
+
+        a {
+            &:hover { text-decoration: none; }
+        }
+
+        &:active, &:hover {
+            background: @grayLighter;
+        }
+    }
+
+    &.vertical-controls {
+        li {
+            width:100%;
+            margin: 0.2em 0;
+            text-align: center;
         }
     }
 }
