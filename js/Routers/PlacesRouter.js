@@ -23,17 +23,7 @@ define(
             },
 
             index: function(filter) {
-                this.AppView.showList();
-            },
-
-            edit: function(id) {
-                
-            },
-            view: function(id) {
-                console.log('Viewing '+id);
-            },
-            del: function(id) {
-                console.log('Deleting '+id);
+                this.__nc.trigger('showList');
             }
         });
     }
