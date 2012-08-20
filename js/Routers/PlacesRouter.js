@@ -13,20 +13,31 @@ define(
     function(Backbone, Places, AppView, PlacesListView, EditPlaceView) {
         return Backbone.Router.extend({
             routes: {
-                'add': 'add',
-                '*filter': 'index'
+                'add': 'addPlace',
+                'list': 'showList',
+                '*filter': 'showList'
             },
 
             initialize: function(options) {
                 this.__nc = options.__nc;
 
+                //this.__nc.on('all', this.silentLocationReplace, this);
+
                 this.AppView = new AppView({el: $('div[data-view=AppView]'), __nc: options.__nc});
             },
 
-            index: function(filter) {
+            silentLocationReplace: function(trigger) {
+                if(Object.contains(this.routes, trigger)) {
+                    this.navigate(Object.keyOf(this.routes, trigger), {
+                        trigger: false
+                    });
+                }
+            },
+
+            showList: function(filter) {
                 this.__nc.trigger('showList');
             },
-            add: function() {
+            addPlace: function() {
                 this.__nc.trigger('addPlace');
             }
         });
