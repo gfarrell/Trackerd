@@ -1,0 +1,131 @@
+#! /usr/bin/python
+
+###############################
+#                             #
+#    Trackerd Build Script    #
+#                             #
+###############################
+
+### Imports ###
+
+import subprocess
+import re
+import os
+
+### Globals ###
+
+_BUILD_PATH = os.path.realpath(__file__).replace('/build', '')
+
+_LOG_LEVEL = 0
+
+
+def log(message, level=False, newline=False):
+    global _LOG_LEVEL
+    if(level is False):
+        level = _LOG_LEVEL
+
+    if(newline is True):
+        linebreak = '\n'
+    else:
+        linebreak = ''
+
+    print ('  ' * level + message + linebreak)
+
+
+def logUp():
+    global _LOG_LEVEL
+    _LOG_LEVEL = _LOG_LEVEL + 1
+
+
+def logDown():
+    global _LOG_LEVEL
+    if(_LOG_LEVEL > 0):
+        _LOG_LEVEL = _LOG_LEVEL - 1
+
+
+def resetLevel():
+    global _LOG_LEVEL
+    _LOG_LEVEL = 0
+
+
+def bpath(name, pkg=''):
+    if(len(pkg) > 0):
+        pkg = pkg + '/'
+
+    return _BUILD_PATH + '/' + pkg + name
+
+_RJS_ARGS = ['node', bpath('r.js', 'build'), '-o', bpath('app.build.js', 'build')]
+
+_PATH_TO_INDEX = bpath('index.html')
+
+_REFACTOR_REGEX = "<script(.*)id=\"AppMainJs\"(.*)</script>"
+_REFACTOR_REPLACE = "<script id=\"AppMainJs\" src=\"build/app.js\"></script>"
+
+
+### Build ###
+
+log('#########################')
+log('#    Trackerd::Build    #')
+log('#########################')
+
+log('')
+
+log('Starting javascript optimisation')
+logUp()
+
+out = (subprocess.check_output(_RJS_ARGS)).split('\n')
+
+for line in out:
+    log(line, False, False)
+
+logDown()
+log('')
+log('Linking index.html to built scripts')
+logUp()
+
+log('Reading index.html')
+f = open(_PATH_TO_INDEX, 'r')
+index_original = f.read()
+f.close()
+
+f = open(_PATH_TO_INDEX, 'r')
+lines = f.readlines()
+f.close()
+
+write = []
+
+log('Parsing file')
+logUp()
+for line in lines:
+    line = re.sub(_REFACTOR_REGEX, _REFACTOR_REPLACE, line)
+    write.append(line)
+
+logDown()
+log('Writing to file')
+f = open(_PATH_TO_INDEX, 'w')
+f.writelines(write)
+log('Closing file')
+f.close()
+logDown()
+log('')
+logUp()
+
+for line in write:
+    log(line)
+
+log('Uploading to AppFog')
+out = (subprocess.check_output(['af', 'update', 'trackerd'])).split('\n')
+logUp()
+for line in out:
+    log(line, False, False)
+
+logDown()
+
+log('Undoing refactoring on index.html')
+f = open(_PATH_TO_INDEX, 'w')
+f.write(index_original)
+f.close()
+
+logDown()
+log('##########################')
+log('           Done           ')
