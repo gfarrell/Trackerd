@@ -15,6 +15,13 @@ define(['Backbone', 'jQuery'], function(Backbone) {
 
         events: {},
 
+        menu: {
+            'addPlace': {'icon':'plus', 'text':'Add a place'},
+            'showList': {'icon':'reorder', 'text':'My Places'},
+            'filterNearby': {'icon':'search', 'text':'Near Me'},
+            'toggleTracking': {'icon':'map-marker', 'text':'Track my location'}
+        },
+
         initialize: function(options) {
             this.__nc = options.__nc;
 
@@ -23,13 +30,7 @@ define(['Backbone', 'jQuery'], function(Backbone) {
             var inner   = $(this.make('div', {'class':'navbar-inner'})),
                 cont    = $(this.make('div', {'class':'container'})),
                 brand   = $(this.make('a', {'class':'brand', 'href':'#'}, 'Trckd')),
-                nav     = $(this.make('ul', {'class':'nav pull-right'})),
-                menu    = [
-                    {'action':'addPlace', 'icon':'plus', 'text':'Add a place'},
-                    {'action':'showList', 'icon':'reorder', 'text':'My Places'},
-                    {'action':'filterNearby', 'icon':'search', 'text':'Near Me'},
-                    {'action':'toggleTracking', 'icon':'map-marker', 'text':'Track my location'}
-                ];
+                nav     = $(this.make('ul', {'class':'nav pull-right'}));
 
             // Put all these elements together
             this.$el.append(inner); inner.append(cont); cont.append(brand, nav);
@@ -38,16 +39,16 @@ define(['Backbone', 'jQuery'], function(Backbone) {
             var _view = this;
 
             // Create the nav menu
-            menu.each(function(opts) {
+            Object.each(this.menu, function(opts, action) {
                 var item = $(
                                 '<li><a href="#" data-action="{0}"><i class="icon-{1}"></i><span class="hidden-phone"> {2}</span></a></li>'
-                                .format(opts.action, opts.icon, opts.text)
+                                .format(action, opts.icon, opts.text)
                             );
 
                 // All button presses will trigger an event in order that the AppView can deal with it (and anyone else who's listening)
                 item.bind('click', function() {
                     _view.__nc.trigger(this);               // Triger the action on the event aggregator
-                }.bind(opts.action));
+                }.bind(action));
                 item.appendTo(nav);                         // Finally add the control to the nav menu
             });
 
@@ -58,7 +59,7 @@ define(['Backbone', 'jQuery'], function(Backbone) {
         makeButtonActive: function(action) {
             if(action.indexOf('toggle') === 0) {
                 this.toggleButton(action);                                                  // Trigger a toggle if this is a toggle-based action
-            } else {
+            } else if(typeOf(this.menu[action]) == 'object') {
                 this.$el.find('li').removeClass('active');                                  // Remove anything else that is 'active'
                 this.$el.find('li:has(a[data-action="'+action+'"])').addClass('active');    // Add active class to our specified element
             }
