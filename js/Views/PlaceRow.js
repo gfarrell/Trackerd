@@ -46,8 +46,19 @@ define(
 
             render: function() {
                 this.els.$note.html(this.model.get('note'));
-                this.els.$tags.html(this.model.get('tags'));
-                this.els.$dist.html(this.model.getDistance().round(2)+' km');
+                
+                this.renderTags();
+                this.renderDistance();
+            },
+
+            renderTags: function() {
+                var tags = this.model.get('tags');
+
+                this.els.$tags.empty();
+
+                tags.each(function(tag) {
+                    this.els.$tags.append($('<span class="tag">'+tag+'</span>'));
+                }, this);
             },
 
             renderDistance: function() {
