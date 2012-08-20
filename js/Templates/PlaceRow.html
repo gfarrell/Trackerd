@@ -1,15 +1,20 @@
-<div class="note"><%= note %></div>
-<div class="row">
-    <div class="row span10">
-        <div class="tags span8">
-            <% tags.each(function(tag) { print('<span class="tag">'+tag+'</span>'); }) %>
-        </div>
-        <div class="distance span2">
-            <%= distance %> km
-        </div>
-    </div>
-    <div class="span2 controls">
-        <a href="#" class="control edit"><i class="icon-edit"></i><span class="hidden-phone"> edit</span></a>
-        <a href="#" data-toggle="modal" class="control delete"><i class="icon-remove"></i><span class="hidden-phone"> remove</span></a>
-    </div>
+<ul class="controls vertical-controls pull-right">
+    <li>
+        <a href="#" class="control edit">
+            <i class="icon-edit"></i>
+            <span class="hidden-phone"> edit</span>
+        </a>
+    </li>
+    <li>
+        <a href="#" data-toggle="modal" class="control delete">
+            <i class="icon-remove"></i>
+            <span class="hidden-phone"> remove</span>
+        </a>
+    </li>
+</ul>
+<div class="note">
+    <%= note %> <span class="distance">(<%= distance %> km)</span>
+</div>
+<div class="tags">
+    <% tags.each(function(tag) { print('<span class="tag">'+tag+'</span>'); }) %>
 </div>
