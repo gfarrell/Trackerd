@@ -37,7 +37,13 @@
         .distance {
             font-weight: normal;
             font-style: italic;
-            font-size:0.8em;
+            font-size:1em;
+            background: lighten(@pink, 40%);
+            padding: 0 0.5em;
+            .border-radius(5px);
+
+            &:before { content: '('; }
+            &:after {content: ')'; }
         }
 
         .tags .tag {
@@ -52,6 +58,7 @@
 
 .controls {
     list-style-type: none;
+    background: @bodyBackground;
 
     li {
         font-size: 1.25em;
