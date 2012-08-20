@@ -15,8 +15,7 @@ define(
             className: 'PlaceRow container',
 
             events: {
-                'click':                 'edit',
-                //'click .control.edit':   'edit',            // Controls for edit ...
+                'click .control.edit':   'edit',            // Controls for edit ...
                 'click .control.delete': 'confirmDelete'    // and delete (brings up a confirmation dialogue)
             },
 
