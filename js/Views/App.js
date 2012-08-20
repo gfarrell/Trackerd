@@ -12,7 +12,7 @@ define(
     function(Backbone, Location, Places, ControlBarView, EditPlaceView, PlacesListView, DeleteModalHtml) {
         return Backbone.View.extend({
             tagName: 'div',
-            className: 'Trackerd',
+            className: 'Trackerd container',
 
             events: {
                 'click .delete-confirm': 'deletePlace'
@@ -44,8 +44,8 @@ define(
             },
 
             loadView: function(view) {
-                if(instanceOf(view, Backbone.View)) {
-                    this.clear();
+                if(instanceOf(view, Backbone.View)) {                           // We can only deal with instances of Backbone.view
+                    this.clear();                                               // Clear our contents
                     view.$el.appendTo(this.$main);
                     this._loaded = view;
 
