@@ -18,12 +18,15 @@ define(
             initialize: function(options) {
                 this.__nc = options.__nc;
 
-                this._rows = [];
+                this.__nc.on('locationUpdate', Places.sort, Places);
+
+                this._rows = {};
                 Places.on('all', this.render, this);
                 Places.fetch();
             },
 
-            render: function() {
+            render: function(trigger) {
+                if(trigger == 'reset') { this.reset(); }
                 Places.each(function(pl) {
                     if(!instanceOf(this._rows[pl.cid], PlaceRow)) {
                         var row = new PlaceRow({model: pl, __nc: this.__nc});
@@ -33,6 +36,11 @@ define(
                         this._rows[pl.cid].delegateEvents();
                     }
                 }, this);
+            },
+
+            reset: function() {
+                Object.each(this._rows, function(r, cid) { r.remove(); });
+                this._rows = {};
             }
         });
     }
