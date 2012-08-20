@@ -29,10 +29,10 @@ define(
                         var row = new PlaceRow({model: pl, __nc: this.__nc});
                         this._rows[pl.cid] = row;
                         row.$el.appendTo(this.$el);
+                    } else {
+                        this._rows[pl.cid].delegateEvents();
                     }
                 }, this);
-
-                this.delegateEvents();
             }
         });
     }
