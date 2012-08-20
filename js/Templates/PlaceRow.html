@@ -1,10 +1,10 @@
 <ul class="controls vertical-controls pull-right">
-    <li>
+    <!--<li>
         <a href="#" class="control edit">
             <i class="icon-edit"></i>
             <span class="hidden-phone"> edit</span>
         </a>
-    </li>
+    </li>-->
     <li>
         <a href="#" data-toggle="modal" class="control delete">
             <i class="icon-remove"></i>
@@ -12,8 +12,8 @@
         </a>
     </li>
 </ul>
-<div class="note">
-    <%= note %> <span class="distance">(<%= distance %> km)</span>
+<div>
+    <span class="note"><%= note %></span> <span class="distance">(<%= distance %> km)</span>
 </div>
 <div class="tags">
     <% tags.each(function(tag) { print('<span class="tag">'+tag+'</span>'); }) %>
