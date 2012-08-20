@@ -46,10 +46,10 @@ define(
             loadView: function(view) {
                 if(instanceOf(view, Backbone.View)) {                           // We can only deal with instances of Backbone.view
                     this.clear();                                               // Clear our contents
-                    view.$el.appendTo(this.$main);
-                    this._loaded = view;
+                    view.$el.appendTo(this.$main);                              // Append the view element to our main container
+                    this._loaded = view;                                        // Store the loaded view
 
-                    view.render();
+                    view.render();                                              // Explicitly render the view
                 } else {
                     throw new Error('AppView can only load instances of Backbone.View.');
                 }
@@ -57,9 +57,9 @@ define(
 
             lazyLoadView: function(name) {
                 var view = null,
-                    func = '__bootstrap'+name;
+                    func = '__bootstrap'+name;                                  // The bootstrap function name - this will be called after initialisation
 
-                switch(name) {
+                switch(name) {                                                  // Possible views are hard-coded
                     case 'PlacesList':
                         view = PlacesListView;
                         break;
@@ -70,47 +70,47 @@ define(
                         throw new Error('Unknown view to load: '+name);
                 }
 
-                if(!instanceOf(this.Views[name], view)) {
-                    this.Views[name] = new view({__nc: this.__nc});
+                if(!instanceOf(this.Views[name], view)) {                       // Check that the stored view is of the right inheritance
+                    this.Views[name] = new view({__nc: this.__nc});             // Otherwise initialise a new one
                     if(instanceOf(this[func], Function)) {
-                        this[func].call(this, this.Views[name]);
+                        this[func].call(this, this.Views[name]);                // Call the bootstrap function if it exists
                     }
                 }
 
-                this.loadView(this.Views[name]);
+                this.loadView(this.Views[name]);                                // Now load the view
             },
 
             __bootstrapEditPlace: function(view) {
-                view.on('all', this.showList, this);    // add, save, cancel events need list showing.
+                view.on('all', this.showList, this);                            // add, save, cancel events need list showing.
             },
 
             render: function() {
                 if(instanceOf(this._loaded, Backbone.View)) {
-                    this._loaded.render();
+                    this._loaded.render();                                      // Render the loaded view if it exists
                 }
 
-                this.delegateEvents();
+                this.delegateEvents();                                          // Force delegateEvents
             },
 
             clear: function() {
                 if(instanceOf(this._loaded, Backbone.View)) {
-                    this._loaded.remove();
+                    this._loaded.remove();                                      // Remove the currently loaded view
                 }
-                this.$main.empty();
+                this.$main.empty();                                             // Clear the contents of the container
             },
 
             showAddWindow: function() {
                 this.lazyLoadView('EditPlace');
 
-                this.Views.EditPlace.primeForNew();
+                this.Views.EditPlace.primeForNew();                             // Adding a new place requires that we clear the form
             },
             showEditWindow: function(cid) {
                 this.lazyLoadView('EditPlace');
 
                 if(cid !== undefined) {
-                    var pl = Places.getByCid(cid);
+                    var pl = Places.getByCid(cid);                              // Fetch the relevant Place
                     if(pl !== undefined && pl !== null) {
-                        this.Views.EditPlace.primeForEdit(pl);
+                        this.Views.EditPlace.primeForEdit(pl);                  // If it exists, let's set up the EditPlaceView to edit
                     }
                 } else {
                     throw new Error('No such Place with cid '+cid+'.');
@@ -124,11 +124,11 @@ define(
             },
 
             confirmDelete: function(model) {
-                this.$deleteModal.data('model', model);
-                this.$deleteModal.modal('show');
+                this.$deleteModal.data('model', model);                         // Set the data-model attribute on the delete modal for easy access
+                this.$deleteModal.modal('show');                                // Show the modal
             },
             deletePlace: function() {
-                this.$deleteModal.data('model').destroy();
+                this.$deleteModal.data('model').destroy();                      // Destroy the model now that the action has been confirmed
             }
         });
     }
