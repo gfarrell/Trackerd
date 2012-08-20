@@ -2,7 +2,7 @@
     baseUrl: "../js",
     mainConfigFile: "../js/main.js",
     name: "../js/main",
-    out: "../js/app.js",
+    out: "app.js",
     preserveLicenseComments: false,
     paths: {
         "requirejs": "libs/require/require"
