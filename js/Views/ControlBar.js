@@ -18,6 +18,8 @@ define(['Backbone', 'jQuery'], function(Backbone) {
         initialize: function(options) {
             this.__nc = options.__nc;
 
+            this.__nc.on('all', this.makeButtonActive, this);
+
             var inner   = $(this.make('div', {'class':'navbar-inner'})),
                 cont    = $(this.make('div', {'class':'container'})),
                 brand   = $(this.make('a', {'class':'brand', 'href':'#'}, 'Trckd')),
@@ -44,21 +46,22 @@ define(['Backbone', 'jQuery'], function(Backbone) {
 
                 // All button presses will trigger an event in order that the AppView can deal with it (and anyone else who's listening)
                 item.bind('click', function() {
-                    if(this.indexOf('toggle') === 0) {      // Some actions will be toggle based
-                        _view.toggleButton(this);           // -> toggle the button state
-                    } else {                                // If not, the buttons will still need an active state
-                        _view.makeButtonActive(this);
-                    }
-
                     _view.__nc.trigger(this);               // Triger the action on the event aggregator
                 }.bind(opts.action));
                 item.appendTo(nav);                         // Finally add the control to the nav menu
             });
+
+            // Bind showList to the brand on click
+            brand.on('click', function() { this.__nc.trigger('showList'); }.bind(this));
         },
 
         makeButtonActive: function(action) {
-            this.$el.find('li').removeClass('active');                                  // Remove anything else that is 'active'
-            this.$el.find('li:has(a[data-action="'+action+'"])').addClass('active');    // Add active class to our specified element
+            if(action.indexOf('toggle') === 0) {
+                this.toggleButton(action);                                                  // Trigger a toggle if this is a toggle-based action
+            } else {
+                this.$el.find('li').removeClass('active');                                  // Remove anything else that is 'active'
+                this.$el.find('li:has(a[data-action="'+action+'"])').addClass('active');    // Add active class to our specified element
+            }
         },
 
         toggleButton: function(action) {
