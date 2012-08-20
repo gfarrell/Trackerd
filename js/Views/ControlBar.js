@@ -38,7 +38,7 @@ define(['Backbone', 'jQuery'], function(Backbone) {
             // Create the nav menu
             menu.each(function(opts) {
                 var item = $(
-                                '<li><a class="btn btn-navbar" data-action="{0}"><i class="icon-{1}"></i><span class="hidden-phone"> {2}</span></a></li>'
+                                '<li><a href="#" data-action="{0}"><i class="icon-{1}"></i><span class="hidden-phone"> {2}</span></a></li>'
                                 .format(opts.action, opts.icon, opts.text)
                             );
 
