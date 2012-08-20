@@ -12,7 +12,7 @@ define(
     function(Backbone, Location, Places, ControlBarView, EditPlaceView, PlacesListView, DeleteModalHtml) {
         return Backbone.View.extend({
             tagName: 'div',
-            className: 'Trackerd container',
+            className: 'Trackerd',
 
             events: {
                 'click .delete-confirm': 'deletePlace'
