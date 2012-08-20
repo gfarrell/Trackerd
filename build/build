@@ -108,18 +108,17 @@ log('Closing file')
 f.close()
 logDown()
 log('')
-logUp()
 
-for line in write:
-    log(line)
+try:
+    log('Uploading to AppFog')
+    out = (subprocess.check_output(['af', 'update', 'trackerd'])).split('\n')
+    logUp()
+    for line in out:
+        log(line, False, False)
 
-log('Uploading to AppFog')
-out = (subprocess.check_output(['af', 'update', 'trackerd'])).split('\n')
-logUp()
-for line in out:
-    log(line, False, False)
-
-logDown()
+    logDown()
+except:
+    log('Failed to upload to AppFog', 0, True)
 
 log('Undoing refactoring on index.html')
 f = open(_PATH_TO_INDEX, 'w')
