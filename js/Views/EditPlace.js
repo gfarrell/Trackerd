@@ -69,7 +69,9 @@ define(
                 }
             },
 
-            save: function() {
+            save: function(e) {
+                e.preventDefault();
+                
                 this.preSave();
 
                 if(!this._new) {
