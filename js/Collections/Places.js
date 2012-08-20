@@ -12,7 +12,11 @@
 define(['Backbone', 'Models/Place', 'Core/Store'], function(Backbone, Place, Store) {
     var Places = Backbone.Collection.extend({
         model: Place,
-        localStorage: (new Store('Trackerd.Places'))
+        localStorage: (new Store('Trackerd.Places')),
+
+        comparator: function(model) {
+            return (model.getDistance());
+        }
     });
 
     return new Places();
