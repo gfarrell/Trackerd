@@ -13,6 +13,7 @@ define(
     function(Backbone, Places, AppView, PlacesListView, EditPlaceView) {
         return Backbone.Router.extend({
             routes: {
+                'add': 'add',
                 '*filter': 'index'
             },
 
@@ -24,6 +25,9 @@ define(
 
             index: function(filter) {
                 this.__nc.trigger('showList');
+            },
+            add: function() {
+                this.__nc.trigger('addPlace');
             }
         });
     }
